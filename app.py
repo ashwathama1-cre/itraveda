@@ -5,6 +5,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 import os
 from models import db, User, Product, Order, Wishlist, RecentlyViewed, SellerStats
+from config import Config
+app.config.from_object(Config)
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", "supersecretkey")
