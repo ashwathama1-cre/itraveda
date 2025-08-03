@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Register | ItraVeda{% endblock %}
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+      <div class="card shadow p-4">
+        <h3 class="text-center mb-4">Register</h3>
+        <form method="POST">
+          <div class="mb-3">
+            <label>Name</label>
+            <input type="text" name="name" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label>Email</label>
+            <input type="email" name="email" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label>Password</label>
+            <input type="password" name="password" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label>Role</label>
+            <select name="role" class="form-select" required>
+              <option value="" disabled selected>Select Role</option>
+              <option value="buyer">Buyer</option>
+              <option value="seller">Seller</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label>Unique Code (leave blank to auto-generate)</label>
+            <input type="text" name="unique_code" class="form-control">
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Register</button>
+        </form>
+        <div class="text-center mt-3">
+          <small>Already registered? <a href="{{ url_for('login') }}">Login here</a></small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
