@@ -40,6 +40,23 @@ def home():
     products = Product.query.order_by(Product.created_at.desc()).all()
     return render_template("home.html", products=products)
 
+
+
+@app.route('/profile', methods=['GET', 'POST'])
+@login_required
+def profile():
+    if request.method == 'POST':
+        current_user.name = request.form.get('name')
+        new_password = request.form.get('password')
+        if new_password:
+            current_user.password = generate_password_hash(new_password)
+        db.session.commit()
+        flash("Profile updated successfully", "success")
+        return redirect(url_for('profile'))
+
+    return render_template('profile.html', user=current_user)
+
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
