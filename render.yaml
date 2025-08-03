@@ -1,12 +1,21 @@
+# render.yaml
+
 services:
   - type: web
-    name: itraveda
+    name: itraveda-app
     env: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn itraveda:app
     plan: free
+    buildCommand: |
+      pip install -r requirements.txt
+    startCommand: gunicorn itraveda.py
     envVars:
       - key: FLASK_ENV
         value: production
       - key: DATABASE_URL
-        value: <your_postgres_database_url>  # Replace this if needed
+        fromDatabase:
+          name: itraveda-db
+          property: connectionString
+
+databases:
+  - name: itraveda-db
+    plan: free
