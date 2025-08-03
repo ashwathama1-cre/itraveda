@@ -32,12 +32,12 @@ login_manager.init_app(app)
 
 
 
+from init_db import init_db
+
 @app.route('/initdb')
-def initdb():
-    from init_db import init_db
+def initialize_database():
     init_db()
     return "✅ Database initialized successfully!"
-
 # ✅ Step 4: Login user loader
 @login_manager.user_loader
 def load_user(user_id):
