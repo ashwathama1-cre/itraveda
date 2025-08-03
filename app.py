@@ -4,27 +4,34 @@ from flask_login import LoginManager, login_user, login_required, logout_user, c
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 import os
+
 from models import db, User, Product, Order, Wishlist, RecentlyViewed, SellerStats
 from config import Config
+
+# ✅ Step 1: Define app BEFORE using it
+app = Flask(__name__)
+
+# ✅ Step 2: Load Config from Config class
 app.config.from_object(Config)
 
-app = Flask(__name__)
+# ✅ Optional override from environment if needed
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", "supersecretkey")
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL", "sqlite:///itraveda.db")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+# ✅ Step 3: Initialize extensions
 db.init_app(app)
 
 login_manager = LoginManager()
 login_manager.login_view = 'login'
 login_manager.init_app(app)
 
+# ✅ Step 4: Login user loader
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-# Routes
-
+# ✅ Routes
 @app.route('/')
 def home():
     products = Product.query.order_by(Product.created_at.desc()).all()
@@ -106,6 +113,6 @@ def buyer_dashboard():
         return redirect(url_for('home'))
     return render_template("buyer_dashboard.html")
 
-# Run App (for local testing)
+# ✅ For local testing
 if __name__ == '__main__':
     app.run(debug=True)
