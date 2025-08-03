@@ -18,3 +18,4 @@ class Config:
 
     # OTP / SMS (optional)
     SMS_API_KEY = os.environ.get('SMS_API_KEY') or 'your_fast2sms_api_key'
+    
