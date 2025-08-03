@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: itraveda-app
+    name: itraveda
     env: python
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn itraveda:app
