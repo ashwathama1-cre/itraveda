@@ -9,12 +9,6 @@ from models import db, User, Product, Order, Wishlist, RecentlyViewed, SellerSta
 from config import Config
 from dotenv import load_dotenv
 load_dotenv()
-from itraveda import app, db
-from models import *
-
-with app.app_context():
-    db.create_all()
-    print("✅ Tables created")
 
 
 # ✅ Step 1: Define app BEFORE using it
