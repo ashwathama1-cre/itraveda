@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}ItraVeda | Home{% endblock %}
+{% block content %}
+<div class="container py-4">
+  <h2 class="mb-4">Available Itras</h2>
+  <div class="row">
+    {% for product in products %}
+    <div class="col-md-4 mb-4">
+      <div class="card h-100 shadow-sm">
+        <img src="{{ product.image_url or url_for('static', filename='default.jpg') }}" class="card-img-top" alt="{{ product.name }}">
+        <div class="card-body">
+          <h5 class="card-title">{{ product.name }}</h5>
+          <p class="card-text">{{ product.description[:100] }}...</p>
+          <p><strong>Price:</strong> ₹{{ product.price }}</p>
+          <a href="#" class="btn btn-primary w-100">Buy Now</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
