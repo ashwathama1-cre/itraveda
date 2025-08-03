@@ -29,6 +29,15 @@ login_manager = LoginManager()
 login_manager.login_view = 'login'
 login_manager.init_app(app)
 
+
+
+
+@app.route('/initdb')
+def initdb():
+    from init_db import init_db
+    init_db()
+    return "✅ Database initialized successfully!"
+
 # ✅ Step 4: Login user loader
 @login_manager.user_loader
 def load_user(user_id):
