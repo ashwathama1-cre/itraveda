@@ -7,6 +7,8 @@ import os
 
 from models import db, User, Product, Order, Wishlist, RecentlyViewed, SellerStats
 from config import Config
+from dotenv import load_dotenv
+load_dotenv()
 
 # ✅ Step 1: Define app BEFORE using it
 app = Flask(__name__)
